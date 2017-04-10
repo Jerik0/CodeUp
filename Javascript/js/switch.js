@@ -6,35 +6,33 @@ var calendar = Math.round(Math.random()* 12)+1;
 
 var purchase = 60;
 
+var total;
+
+
+// Lucky Number Discounts
 switch (luckynumber) {
-    case 0:
-        console.log("Sorry, no discount this time...");
-        console.log ("Your purchase totals to: $" + (purchase));
-        break;
     case 1:
-        console.log("It's your lucky day! You get a 10% discount! After discount, ");
-        console.log ("your purchase totals to: $" + (purchase - (purchase * .10)));
+        total = purchase * .90;
+        console.log("It's your lucky day! You get a 10% discount! After discount, our purchase totals to: $" + total.toFixed(2));
         break;
     case 2:
         console.log("It's your lucky day! You get a 25% discount!");
-        console.log ("Your purchase totals to: $" + (purchase - (purchase * .25)));
-        break;
-    case 3:
-        console.log("Sorry, no discount this time...");
-        console.log ("Your purchase totals to: $" + (purchase));
+        total = purchase * .75;
+        console.log ("Your purchase totals to: $" + total.toFixed(2));
         break;
     case 4:
-        console.log("It's your lucky day! You get a 50% discount!! Whaaaaat?");
-        console.log ("Your original purchase was $" + purchase + ". Your purchase totals to: $" + (purchase - (purchase * .50)));
+        total = purchase * .50;
+        console.log("It's your lucky day! You get a 50% discount!! Whaaaaat? Your total is $" + total.toFixed(2) + "!");
         break;
     case 5:
-        console.log("Okay you're gonna love this. You owe us NOTHING!!");
-        console.log ("Your original purchase was $" + purchase + ". Your purchase totals to: $" + (purchase - (purchase)));
+        total = 0;
+        console.log("Okay you're gonna love this. You owe us NOTHING!! Your total is $" + total.toFixed(2));
         break;
     default:
-        console.log("hmm that's weird...something went wrong!");
+        console.log("Sorry no discount today! Your total is $" + purchase.toFixed(2));
 }
 
+//Calendar Month Naming
 switch (calendar) {
     case 1:
         console.log("January");
