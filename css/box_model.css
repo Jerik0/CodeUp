@@ -1,0 +1,66 @@
+.box {
+    border: solid 1px black;
+    width: 50px;
+    height: 50px;
+    color: #ffffff;
+    padding: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 50px;
+    float: left;
+    position: relative;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#head1 {
+
+}
+.arrow {
+    position: relative;
+    background: url(../images/codeup-arrow.png) no-repeat;
+    top: -80px;
+    right: -45px;
+    height: 50px;
+    width: 60px;
+}
+#box1 {
+    background-color: red;
+}
+#box2 {
+    background-color: orange;
+}
+#box3 {
+    background-color: yellow;
+}
+#box4 {
+    background-color: green;
+}
+#box5 {
+    background-color: blue;
+}
+#box6 {
+    background-color: violet;
+}
+a {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#container {
+
+    position: relative;
+}
+
+#ribbon {
+    position: absolute;
+    top: -80px;
+    right: -8px;
+    background-image: url(../images/codeup-ribbon.png);
+    height: 140px;
+    width: 148px;
+}
+
+#container :nth-child(odd) {
+    clear: left;
+}

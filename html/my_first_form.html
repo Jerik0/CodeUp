@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>My First HTML Form</title>
+    </head>
+    <body>
+        <h2>User Login</h2>
+        <form method="POST" action="http://requestb.in/113rbhn1">
+            <p>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" placeholder="Username">
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="Password">
+            </p>
+            <p>
+                <button>Login</button>
+            </p>
+        </form>
+        <h2>Compose an Email</h2>
+        <form method="POST" action="http://requestb.in/113rbhn1">
+            <p>
+            <label for="email_to">To</label>
+            <input id="email_to" type="text" name="email_to">
+            <br>
+            <label for="email_from">From</label>
+            <input id="email_from" type="text" name="email_from">
+            <br>
+            <label for="subject">Subject</label>
+            <input id="subject" type="text" name="subject">
+            <br>
+            </p>
+            <textarea name="email_body" id="email_body"></textarea>
+            <br>
+            <input type="checkbox" id="send_copy" checked="yes">
+            <label for="send_copy">Send copy of e-mail to you?</label>
+            <p><button>Send</button></p>
+        </form>
+        <form method="POST" action="http://requestb.in/113rbhn1">
+            <h2>Multiple Choice Test</h2>
+            <p>What's Better?</p>
+            <input type="radio" id="Star_Wars" name="show" value="starwars">
+            <label for="Star_Wars">Star Wars</label>
+            <input type="radio" id="Star_Trek" name="show" value="startrek">
+            <label for="Star_Trek">Star Trek</label>
+            <br>
+            <p>Which Consoles Do You Like??</p>
+            <input type="checkbox" id="xboxone" name="xbone" value="yes">
+            <label for="xboxone">Xbox One</label>
+            <input type="checkbox" id="PS4" name="ps4" value="yes">
+            <label for="PS4">PS4</label>
+            <button>Let The World Know</button>
+        </form>
+        <form method="POST" action="http://requestb.in/113rbhn1">
+            <h2>Select Testing</h2>
+            <p>Do you like me?</p>
+            <select>
+                <option value="1">Yep</option>
+                <option selected value="0">Nope</option>
+            </select>
+            <br>
+            <button>Send it</button>
+        </form>
+    </body>
+</html>
