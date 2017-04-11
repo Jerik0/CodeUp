@@ -1,10 +1,20 @@
 
-var allCones = Math.floor(Math.random() * 50) + 50;
+"use strict";
 
-var cones = Math.floor(Math.random() * 5) + 1;
+var counter = 2;
 
-do {
+// Cones Exercise
+var conesInventory = Math.floor(Math.random() * 50) + 50;
 
-} while () {
+var conesRequested;
 
+var conesSold;
+
+
+
+
+// Number Doubling Exercise
+while (counter <= 65536) {
+    console.log(counter);
+    counter = counter * 2;
 }
