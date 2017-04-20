@@ -25,7 +25,13 @@ for (i=0; i<=10; i++) {
 
 //Bonus Exercise
 
-// for (li=)
-//     var li = document.create
-//      var ul = document.createElement("ul");
+var list = "<ul>\n"
 
+for(var i = 0; i < 5; i++){
+    var random = (Math.floor(Math.random() * 10) + 10);
+    list += "<li>Random " + random + "</li>";
+}
+
+list += "</ul>";
+console.log(list);
+document.write(list);
