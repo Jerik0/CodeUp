@@ -2,12 +2,26 @@
 
 $(document).ready(function(){
 
-    var contentsH1 = $('#first-header').text();
+    var input = $('#input-one').text();
+    var inputButton = $('#input-button');
 
-    $('li').css('font-size', '20px');
+    $('#button-one').click(function() {
+        $('p').css('border', 'blue solid 1px');
+    });
 
-    $('li, h1, p').css('color', 'blue');
+    $('#button-two').dblclick(function() {
+        $('body').css('background-color', '#000');
+        $('body').css('color', '#fff');
+    });
 
-    alert(contentsH1);
+    $('#button-three').hover(function() {
+        $('p').css('border', 'none');
+        $('body').css('background-color', 'white');
+        $('body').css('color', 'black');
+    });
 
+    console.log(input);
+    if (input === 'partytime') {
+        $('body').css('background', 'blue');
+    }
 });
