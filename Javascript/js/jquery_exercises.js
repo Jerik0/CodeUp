@@ -2,11 +2,6 @@
 
 $(document).ready(function(){
 
-    var contents = $('#first-row').text();
-
-    alert('ready');
-
-    alert(contents);
-
+    $('.codeup').css ('border', '1px solid red');
 
 });
