@@ -2,26 +2,31 @@
 
 $(document).ready(function(){
 
-    var input = $('#input-one').text();
+    var input = $('#input-one');
     var inputButton = $('#input-button');
+    var buttonOne = $('#button-one');
+    var buttonTwo = $('#button-two');
+    var buttonThree = $('#button-three');
 
-    $('#button-one').click(function() {
+    buttonOne.click(function() {
         $('p').css('border', 'blue solid 1px');
     });
 
-    $('#button-two').dblclick(function() {
+    buttonTwo.dblclick(function() {
         $('body').css('background-color', '#000');
         $('body').css('color', '#fff');
     });
 
-    $('#button-three').hover(function() {
+    buttonThree.hover(function() {
         $('p').css('border', 'none');
         $('body').css('background-color', 'white');
         $('body').css('color', 'black');
     });
 
-    console.log(input);
-    if (input === 'partytime') {
-        $('body').css('background', 'blue');
-    }
+    inputButton.click(function() {
+        if (input.val() === 'partytime') {
+            $('body').css('background', 'blue');
+        }
+    });
+
 });

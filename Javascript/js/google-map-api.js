@@ -15,25 +15,28 @@
 
     }
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    var pinPosition = {lat: geocoder.results[0].geometry.location.lat(), lng: geocoder.results[1].geometry.location.lng()};
-    var marker = new google.maps.Marker({
-        position: pinPosition,
-        map: map
-    });
+
+    // var locationInfo =
+
 
     var infowindow = new google.maps.InfoWindow({
-        content: "Changing the world, one programmer at a time."
+        content: "Eventually this will be unique to the address..."
     });
 
-    infowindow.open(map, marker);
-
     function getAddress() {
-        var pinPosition = {lat: this.results[0].geometry.location.lat(), lng: this.results[1].geometry.location.lng()};
-        var marker = new google.maps.Marker({
-            position: pinPosition,
-            map: map
-        });
+
         geocoder.geocode({"address": address.value}, function (results, status) {
+            var pinPosition = {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng()
+            };
+            var marker = new google.maps.Marker({
+                position: pinPosition,
+                map: map
+            });
+
+            infowindow.open(map, marker);
+
             if (status == "OK") {
                 console.log('testing');
                 map.setCenter(results[0].geometry.location);
