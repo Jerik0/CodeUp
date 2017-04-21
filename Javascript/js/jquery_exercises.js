@@ -21,12 +21,17 @@ $(document).ready(function(){
         $('p').css('border', 'none');
         $('body').css('background-color', 'white');
         $('body').css('color', 'black');
+        $('li').css('color', 'black');
     });
 
-    inputButton.click(function() {
-        if (input.val() === 'partytime') {
-            $('body').css('background', 'blue');
+    $('li').hover(
+        function() {
+        $(this).css('color', 'red');
+    },
+        function() {
+            $(this).css('color', 'white');
         }
-    });
+    );
+
 
 });
