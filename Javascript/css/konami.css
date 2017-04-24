@@ -1,0 +1,27 @@
+body {
+    /*position: absolute;*/
+    background-color: dimgrey;
+    color: white;
+    font-size: 1.5em;
+}
+
+h1 {
+    margin: 0 auto;
+    background-color: #ff6557;
+    border: solid 1px #54d7ce;
+    width: 50%;
+    min-width: 50%;
+    text-align: center;
+    /*position: relative;*/
+}
+
+li {
+list-style-type: none;
+}
+
+#derpy {
+    position: absolute;
+    top: -550px;
+    left: 21%;
+    /*height: 0px;*/
+}
