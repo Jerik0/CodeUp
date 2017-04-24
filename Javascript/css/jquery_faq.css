@@ -6,3 +6,14 @@ dt {
 .invisible {
     display: none;
 }
+
+.clicked {
+    background-color: #e1ed8c;
+    width: 100%;
+}
+
+/*.question {*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*background-color: #3fafff;*/
+/*}*/
