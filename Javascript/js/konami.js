@@ -37,7 +37,9 @@ $(document).ready(function(){
                 $('#header1').html('YOU WIN!');
                 audio.get(0).play();
 
-                $('#derpy').slideDown(5000);
+                $('#derpy').animate({
+                    top: 100
+                }, 5000);
 
                 if (e.keyCode === 27) {
                     audio(0).pause();
