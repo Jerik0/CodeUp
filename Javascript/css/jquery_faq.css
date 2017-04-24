@@ -12,6 +12,10 @@ dt {
     width: 100%;
 }
 
+li {
+    list-style-type: none;
+}
+
 /*.question {*/
     /*display: block;*/
     /*width: 100%;*/
