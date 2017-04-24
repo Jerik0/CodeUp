@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/jquery_faq.css">
-    <title>National Parks</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <title>Steam FAQ</title>
 </head>
 <body>
 <h1>So you'd like to have your game on Steam?</h1>
@@ -31,5 +34,18 @@
     <dt>What language is the Steamworks API available in?</dt>
         <dd class="invisible">The Steamworks API is written in C++.</dd>
 </dl>
+
+<button id="questions">Get Answers</button>
+
+<script>
+"use strict"
+    $(document).ready(function () {
+
+        $('#questions').click(function () {
+            $('dd').toggleClass("invisible");
+        })
+
+    })
+</script>
 </body>
 </html>
