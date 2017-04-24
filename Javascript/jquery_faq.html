@@ -37,29 +37,31 @@
 
 <button id="questions">Hide/show Answers</button>
 
-<h3>Factorio</h3>
 <ul>
+    <h3>Factorio</h3>
     <li>Strategy/Resource Management Game</li>
     <li>Indie</li>
     <li>Design and Build Systems to Optimize Efficiency</li>
     <li>Can easily take years of your life away</li>
 </ul>
 
-<h3>Minecraft</h3>
 <ul>
+    <h3>Minecraft</h3>
     <li>Created in 2009</li>
     <li>Markus Persson (Notch) is the man who developed Minecraft</li>
     <li>Minecraft is a game about building and surviving</li>
     <li>Also will suck the life right away from you.</li>
 </ul>
 
-<h3>Rim World</h3>
 <ul>
+    <h3>Rim World</h3>
     <li>Indie Game as well.</li>
     <li>Town Building/Resource Management Game</li>
     <li>Haven't played much of it.</li>
     <li>Every characted has randomly generated stats and personality traits.</li>
 </ul>
+
+<button id="last-items">Highlight Last Items</button>
 
 <script>
 "use strict"
@@ -67,11 +69,25 @@
 
         $('#questions').click(function () {
             $('dd').toggleClass("invisible");
-        })
+        });
 
         $('dt').click (function(){
             $(this).toggleClass("clicked");
-        })
+        });
+
+        $('#last-items').click(function() {
+            $('ul').each(function(i, e) {
+                $(e).children().last().toggleClass("highlighted");
+            })
+        });
+
+        $('h3').click(function() {
+            $(this).parent().children().toggleClass("boldened");
+        });
+
+        $('li').click(function() {
+            $(this).parent().children().first().next().toggleClass("selected");
+        });
 
     })
 </script>
