@@ -1,3 +1,9 @@
+body {
+    background-image: url("../../images/image1.jpg");
+    background-size: 100%;
+    color: #ffffff;
+}
+
 h1 {
     margin: 0 auto;
 }
@@ -12,8 +18,9 @@ dt {
 }
 
 .clicked {
-    background-color: #e1ed8c;
+    background-color: #1cbced;
     width: 100%;
+    display: inline;
 }
 
 li {
@@ -26,6 +33,7 @@ li {
 
 .highlighted {
     background-color: #ed9a41;
+    display: inline;
 }
 
 .selected {
@@ -33,6 +41,7 @@ li {
 }
 
 ul {
-    background-color: #393939;
     color: #c6faff;
+    background-color: rgba(69, 69, 69, 0.5);
+    padding: 5px;
 }

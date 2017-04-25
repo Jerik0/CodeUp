@@ -16,10 +16,19 @@ $(document).ready(function(){
     //declaring interval for use with activation
     var interval = 1000;
 
-
+    if ($('#enter-cheats').innerHTML.val === 'partytime') {
+        console.log('it worked!');
+    }
 
     $(document).keyup(function(e){
 
+        if (e.keyCode === 27) {
+            console.log("it worked");
+            audio.get(0).pause();
+            $('#derpy').animate({
+                top: -550
+            });
+        }
 
         //if the key pressed corresponds to the index in the array
             if (e.keyCode === cheatCode[i]) {
@@ -40,12 +49,7 @@ $(document).ready(function(){
                 $('#derpy').animate({
                     top: 100
                 }, 5000);
-
-                if (e.keyCode === 27) {
-                    audio(0).pause();
-                }
             }
-
     });
 
 })
