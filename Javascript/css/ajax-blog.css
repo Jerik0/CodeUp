@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    align-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    color: #defffd;
+    background: url('../../images/starwarsv.jpg') #202020;
+    background-size: cover;
+    background-attachment: fixed;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#nav-bar {
+    background-color: rgba(58, 44, 56, 0.8);
+    padding: 5px;
+}
+
+h1 {
+    text-align: center;
+    color: #3176ff;
+    background-color: rgba(58, 44, 56, 0.8);
+    /*display: inline;*/
+    margin: 20px auto;
+}
+
+button {
+    margin-left: 2px;
+    padding-bottom: 3px;
+    font-size: 1.5em;
+    text-decoration: dotted;
+    text-decoration-color: #00bfed;
+    border: solid 1px #ffffff;
+    border-radius: 10px;
+    background-color: rgba(39, 47, 58, 0.8);
+    color: #fcff8d;
+}
+
+button:focus {
+    outline: none;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+}
+
+td {
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid black;
+    background-color: rgba(58, 44, 56, 0.8);
+    margin-bottom: 50px;
+    font-weight: lighter;
+}
+
+.title {
+    display: inline;
+    font-weight: bold;
+    text-align: center;
+    color: #fcff8d;
+}
+
+.date {
+    display: inline;
+}
+
+.content {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #3176ff;
+    margin-bottom: 5%;
+}
+
+.table-data {
+    /*width: 5%;*/
+    text-align: center;
+}

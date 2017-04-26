@@ -6,20 +6,20 @@
 </head>
 <body>
 
-<h1>Jericho Storefront</h1>
+    <h1>Jericho Storefront</h1>
 
-<button id="refresh-items">Refresh Stock</button>
-<table id="products">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Categories</th>
-        </tr>
-    </thead>
-    <tbody id="insertProducts"></tbody>
-</table>
+    <button id="refresh-items">Refresh Stock</button>
+    <table id="products">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Categories</th>
+            </tr>
+        </thead>
+        <tbody id="insertProducts"></tbody>
+    </table>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -28,17 +28,16 @@ $(document).ready(function() {
     "use strict";
 
     // TODO: Create an ajax GET request for /data/inventory.json
-    var jqxhr = $.ajax('data/inventory.json');
 
     var tableInfo = $('#insertProducts');
 
-    var i = 0;
-
     // TODO: Take the data from inventory.json and append it to the products table
-    function refresh () {
-        jqxhr.done(function (data, status, jqxhr) {
+    function refresh() {
+        $.ajax('data/inventory.json').done(function (data, status) {
+            tableInfo.html('');
+            console.log(data);
             data.forEach(function (e, i) {
-                tableInfo.append('<tr>' + '<td>' + e.title + '</td>' + '<td>' + e.quantity + '</td>' + '<td>' + e.price + '</td>' + '<td>' + e.categories + '</td>' + '</tr>');
+                tableInfo.append('<tr>' + '<td>' + e.title + '</td>' + '<td>' + e.quantity + '</td>' + '<td>' + '$' + e.price + '</td>' + '<td>' + e.categories + '</td>' + '</tr>');
             });
             console.log(status);
         });

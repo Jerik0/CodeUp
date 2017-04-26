@@ -2,9 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>First Blog</title>
+    <link rel="stylesheet" href="javascript/css/ajax-blog.css">
 </head>
 <body>
-$END$
+<div id="nav-bar">
+    <button id="blog-get">Read Stuff</button>
+    <button id="blog-post">Speak Your Mind</button>
+</div>
+    <h1>Jericho Blog</h1>
+
+    <table>
+        <thead>
+        </thead>
+        <tbody id="posts"></tbody>
+    </table>
+
+    <div id="cat-date"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        "use strict";
+
+        function getBlogs() {
+            $.ajax('data/blog.json').done(function(data) {
+
+                data.forEach(function(e, i) {
+
+                    $('#posts').append('<tr>' + '<td class="title">' + e.title + '</td>' + '</tr>' + '<tr>' + '<td class="date">' + e.date + '</td>' + '</tr>' + '<tr>' +
+                    '<td class="content">' + e.content + '</td>')
+                });
+
+            }).fail(function (data, status) {
+                console.log(status);
+
+        })};
+
+        $('#blog-get').click(function() {
+            $('#posts').html('');
+            getBlogs();
+        });
+
+    });
+</script>
 </body>
 </html>

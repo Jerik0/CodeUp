@@ -30,5 +30,13 @@
             "tool"
         ],
         "price": 10
+    }, {
+        "title": "Diamond tricycle",
+        "quantity": 17,
+        "categories": [
+          "valuable",
+          "bicycles"
+        ],
+        "price": 5
     }
 ]
