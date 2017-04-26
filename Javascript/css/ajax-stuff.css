@@ -1,29 +1,36 @@
 body {
     font-size: 1.5em;
     font-family: 'Open Sans', sans-serif;
-    background-image: url('https://unsplash.com/search/store?photo=FKHcOvyMar0'); max-height: 100%;
+    background-image: url('../../images/records.jpg');
+    background-size: 100%;
+    margin: 0;
 }
 
 h1 {
+    background-color: rgba(56, 55, 65, 0.6);
+    color: white;
     text-align: center;
     margin-bottom: 5%;
+    border: solid 1px #3d8aff;
 }
 
 thead {
-    background-color: #747287;
+    background-color: rgba(56, 55, 65, 0.6);
     color: white;
 }
 
 table {
-    border: solid 1px black;
-    margin: 0 auto;
+    text-transform: uppercase;
+    margin: auto;
     height: 50%;
     width: 50%;
 }
 
 td {
+    font-weight: lighter;
+    border: solid 1px #3d8aff;
     padding: 2px;
     margin: 20px;
-    background-color: #5a5862;
-    color: #c6faff;
+    background-color: rgba(78, 76, 85, 0.8);
+    color: #d4f7ff;
 }

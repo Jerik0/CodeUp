@@ -6,8 +6,9 @@
 </head>
 <body>
 
-<h1>My Tool Store</h1>
+<h1>Jericho Storefront</h1>
 
+<button id="refresh-items">Refresh Stock</button>
 <table id="products">
     <thead>
         <tr>
@@ -34,11 +35,18 @@ $(document).ready(function() {
     var i = 0;
 
     // TODO: Take the data from inventory.json and append it to the products table
-    jqxhr.done(function(data, status, jqxhr) {
-        data.forEach(function(e, i) {
-            tableInfo.append('<tr>' + '<td>' + e.title + '</td>' + '<td>' + e.quantity + '</td>' + '<td>' + e.price + '</td>'+ '<td>' + e.categories + '</td>' + '</tr>');
+    function refresh () {
+        jqxhr.done(function (data, status, jqxhr) {
+            data.forEach(function (e, i) {
+                tableInfo.append('<tr>' + '<td>' + e.title + '</td>' + '<td>' + e.quantity + '</td>' + '<td>' + e.price + '</td>' + '<td>' + e.categories + '</td>' + '</tr>');
+            });
+            console.log(status);
         });
-        console.log(status);
+    }
+
+    $('#refresh-items').click(function () {
+            refresh();
+            console.log(status);
         });
 });
 </script>
