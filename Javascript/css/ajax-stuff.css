@@ -1,0 +1,29 @@
+body {
+    font-size: 1.5em;
+    font-family: 'Open Sans', sans-serif;
+    background-image: url('https://unsplash.com/search/store?photo=FKHcOvyMar0'); max-height: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+thead {
+    background-color: #747287;
+    color: white;
+}
+
+table {
+    border: solid 1px black;
+    margin: 0 auto;
+    height: 50%;
+    width: 50%;
+}
+
+td {
+    padding: 2px;
+    margin: 20px;
+    background-color: #5a5862;
+    color: #c6faff;
+}

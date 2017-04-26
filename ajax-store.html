@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Store</title>
+    <link rel="stylesheet" href="javascript/css/ajax-stuff.css">
+</head>
+<body>
+
+<h1>My Tool Store</h1>
+
+<table id="products">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Categories</th>
+        </tr>
+    </thead>
+    <tbody id="insertProducts"></tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    "use strict";
+
+    // TODO: Create an ajax GET request for /data/inventory.json
+    var jqxhr = $.ajax('data/inventory.json');
+
+    var tableInfo = $('#insertProducts');
+
+    var i = 0;
+
+    // TODO: Take the data from inventory.json and append it to the products table
+    jqxhr.done(function(data, status, jqxhr) {
+        data.forEach(function(e, i) {
+            tableInfo.append('<tr>' + '<td>' + e.title + '</td>' + '<td>' + e.quantity + '</td>' + '<td>' + e.price + '</td>'+ '<td>' + e.categories + '</td>' + '</tr>');
+        });
+        console.log(status);
+        });
+});
+</script>
+
+</body>
+</html>

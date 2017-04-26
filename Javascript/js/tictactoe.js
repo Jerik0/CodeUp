@@ -17,7 +17,7 @@ $(document).ready(function() {
         gameBoard.animate({
             opacity: 1
         });
-        console.log(gameBoard.opacity);
+        $('#player').text('Player One Start!');
     })
 
     // if (gameBoard.opacity == '1') {
@@ -25,12 +25,14 @@ $(document).ready(function() {
             if ($(this).text() == '') {
                 if (i == '0') {
                     console.log(this);
-                    $(this).text(x);
-                    $(this).css("border", "1px solid red");
+                    $(this).text('X').css('color', '#ff6f4b');
+                    $(this).css("border", "1px solid #ff6f4b");
+                    $('#player').text('Player Two Turn');
                     i++;
                 } else if (i == '1') {
-                    $(this).text(o);
-                    $(this).css("border", "1px solid red");
+                    $(this).text('O').css('color', '#3d8aff');
+                    $(this).css("border", "1px solid #3d8aff");
+                    $('#player').text('Player One Turn');
                     i--;
                 }
             }
