@@ -17,11 +17,15 @@
 
     <div id="advert"></div>
 
+    <div hidden id="write">
+        <input id="content-area" type="text" value="test">
+        <button id="post-it">Post It</button>
+    </div>
+
     <table>
         <tbody id="posts"></tbody>
     </table>
 
-    <div id="cat-date"></div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -29,6 +33,9 @@
     $(document).ready(function() {
 
         "use strict";
+
+//--------------------------------------------------------------------------
+//      Functionality for getting blog information from ajax request
 
         function getBlogs() {
             $.ajax('data/blog.json').done(function(data) {
@@ -48,11 +55,34 @@
             $('#posts').html('');
             getBlogs();
         });
+//--------------------------------------------------------------------------
+//              Will eventually click on title name to animate the date sliding out from the left.
+//        $('.title').click(function() {
+//            console.log('worked');
+//        })
+//--------------------------------------------------------------------------
+//       Functionality for Posting Blogs
+        function postBlogs() {
+            $.ajax("data/blog.json", {
+                type: "POST",
+                data: {
+                    title: $('#content-area').val(),
+                    date: "",
+                    content: "",
+                    categories: ""
+                }
+            }).done(function(data, status) {
+                console.log(status);
+            });
+        }
 
-        $('.title').click(function() {
-            console.log('worked');
+        $('#blog-post').click(function() {
+            $('#write').show();
+        });
+
+        $('#post-it').click(function() {
+            postBlogs();
         })
-
     });
 </script>
 </body>
