@@ -30,6 +30,7 @@ $(document).ready(function() {
                buildWeather(data);
             });
     }
+//---------------------------------------------------------------
 
     //Functionality to create new instance of Google Map from Google API.
     function initMap() {
