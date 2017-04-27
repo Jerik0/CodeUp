@@ -39,7 +39,7 @@
 
         function getBlogs() {
             $.ajax('data/blog.json').done(function(data) {
-
+                data.reverse();
                 data.forEach(function(e, i) {
 
                     $('#posts').append('<tr>' + '<td class="title">' + e.title + ': ' + '</td>' + '</tr>' + '<tr>' + '<td class="date">' + e.date + '</td>' + '</tr>' + '<tr>' +

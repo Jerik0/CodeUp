@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Map</title>
+    <link rel="stylesheet" href="javascript/css/weather_map.css">
+</head>
+<body>
+
+    <h1>Weather Application</h1>
+
+    <h2 id="city-name"></h2>
+
+    <div id="test-info"></div>
+
+    <div id="map"></div>
+
+    <input id="city-input" type="text" value="san antonio" placeholder="your city here">
+
+    <button id="get-info">Go!</button>
+    <input id="lat" type="text">
+    <input id="lng" type="text">
+    <button id="lat-lng">Find Using Coords!</button>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjbtktHE1HMBdOfoSjwZSnQEAfWClqL0M"></script>
+
+    <script src="javascript/js/weather_map.js"></script>
+
+</body>
+</html>
