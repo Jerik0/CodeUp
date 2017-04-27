@@ -3,7 +3,7 @@ body {
     align-content: center;
     font-family: 'Roboto', sans-serif;
     font-size: 2em;
-    color: #defffd;
+    color: #FCF7C5;
     background: url('../../images/starwarsv.jpg') #202020;
     background-size: cover;
     background-attachment: fixed;
@@ -11,68 +11,99 @@ body {
     max-width: 100%;
 }
 
-#nav-bar {
-    background-color: rgba(58, 44, 56, 0.8);
-    padding: 5px;
+h1 {
+    text-align: left;
+    color: #ffffff;
+    background-color: rgba(41,34,31, 0.8);
+    margin-bottom: 100px;
+    margin-top: 0px;
+    padding-bottom: 10px;
+    position: relative;
 }
 
-h1 {
-    text-align: center;
-    color: #3176ff;
-    background-color: rgba(58, 44, 56, 0.8);
-    /*display: inline;*/
-    margin: 20px auto;
+#nav-bar {
+    margin-bottom: 100px;
+    float: right;
+    /*background-color: rgba(41,34,31, 0.8);*/
+    padding: 5px;
+    position: absolute;
+    right: 0%;
+    top: 1%;
 }
 
 button {
     margin-left: 2px;
     padding-bottom: 3px;
     font-size: 1.5em;
-    text-decoration: dotted;
-    text-decoration-color: #00bfed;
-    border: solid 1px #ffffff;
+    font-weight: lighter;
+    border: solid 1px #FC354C;
     border-radius: 10px;
     background-color: rgba(39, 47, 58, 0.8);
-    color: #fcff8d;
+    color: #ffffff;
 }
 
 button:focus {
     outline: none;
+    color: #ffffff;
+}
+
+button:active {
+    border: 1px solid #ffffff;
 }
 
 table {
-    width: 100%;
-    margin: 0 auto;
+    width: 70%;
+    /*margin: 0 auto;*/
+}
+
+tr {
+    display: inline;
 }
 
 td {
-    border-radius: 10px;
     text-align: center;
     border: 1px solid black;
-    background-color: rgba(58, 44, 56, 0.8);
+    background-color: rgba(41,34,31, 0.8);
     margin-bottom: 50px;
+    margin-top: 15px;
     font-weight: lighter;
+    display: inline;
 }
 
 .title {
     display: inline;
     font-weight: bold;
     text-align: center;
-    color: #fcff8d;
+    color: #0ABFBC;
+    border-right: 0px;
 }
 
 .date {
+    margin-left: 0px;
     display: inline;
+    color: #188f9b;
+    border-left: 0px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .content {
+    display: block;
     width: 80%;
     padding: 10px;
-    border: 1px solid #3176ff;
+    border: 1px solid #FC354C;
+    border-radius: 10px;
     margin-bottom: 5%;
 }
 
 .table-data {
     /*width: 5%;*/
     text-align: center;
+}
+
+#advert {
+    width: 28%;
+    border: 1px solid black;
+    background-color: rgba(41,34,31, 0.8);
+    display: inline;
 }

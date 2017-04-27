@@ -6,15 +6,18 @@
     <link rel="stylesheet" href="javascript/css/ajax-blog.css">
 </head>
 <body>
-<div id="nav-bar">
-    <button id="blog-get">Read Stuff</button>
-    <button id="blog-post">Speak Your Mind</button>
-</div>
+
     <h1>Jericho Blog</h1>
 
+    <div id="nav-bar">
+        <button id="blog-get">Read Stuff</button>
+        <button id="blog-post">Speak Your Mind</button>
+        <button id="about-me">About Me</button>
+    </div>
+
+    <div id="advert"></div>
+
     <table>
-        <thead>
-        </thead>
         <tbody id="posts"></tbody>
     </table>
 
@@ -32,7 +35,7 @@
 
                 data.forEach(function(e, i) {
 
-                    $('#posts').append('<tr>' + '<td class="title">' + e.title + '</td>' + '</tr>' + '<tr>' + '<td class="date">' + e.date + '</td>' + '</tr>' + '<tr>' +
+                    $('#posts').append('<tr>' + '<td class="title">' + e.title + ': ' + '</td>' + '</tr>' + '<tr>' + '<td class="date">' + e.date + '</td>' + '</tr>' + '<tr>' +
                     '<td class="content">' + e.content + '</td>')
                 });
 
@@ -45,6 +48,10 @@
             $('#posts').html('');
             getBlogs();
         });
+
+        $('.title').click(function() {
+            console.log('worked');
+        })
 
     });
 </script>
