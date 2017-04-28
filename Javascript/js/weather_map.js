@@ -3,15 +3,16 @@ $(document).ready(function() {
     "use strict";
 
     var cityName = $('#city-name');
+    var cityInput = $('#city-input');
     var map = new google.maps.Map($('#map')[0], {
-        center: {lat: 29.445864, lng: -98.503457},
+        center: {lat: 40.003643, lng: -75.142849},
         zoom: 10
     });
     var pos;
 //---------------------------------------------------------------
 
-    // Function to Retrieve weather information from OpenWeatherMap
-    function getWeather(lat, long) {
+    //Function to Retrieve weather information from OpenWeatherMap
+    function getWeather(lat, long, zip) {
 
         //Retrieves data from Open Weather Map
         $.ajax({
@@ -19,10 +20,11 @@ $(document).ready(function() {
             type: "GET",
             data: {
                 APPID: "cfdaa9b51b09b5239ab50c12797419d3",
-                q: $('#city-input').val(),
+                q: cityInput.val(),
                 units: "imperial",
                 lat: lat,
-                lon: long
+                lon: long,
+                zip: zip
             }
             }).done(function(data, status) {
                buildWeather(data);
@@ -44,7 +46,7 @@ $(document).ready(function() {
             draggable: true
         });
 
-        //This forces the marker-
+        //This forces the marker--once user has dragged it-- to input its current latitude and longitude into the variables 'lat' and 'lng' respectively. It will then center the map on those coordinates and send the coordinates to the getWeather function.
         google.maps.event.addListener(marker, 'dragend', function() {
             var lat = this.getPosition().lat();
             var lng = this.getPosition().lng();
@@ -67,14 +69,14 @@ $(document).ready(function() {
 
         //Create a loop that loops three times, and each time, adds specified information into a <div> element named "test-info".
         for(var i=0; i<=2; i++) {
-            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png"' + '>' + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
+            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/ ' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png"' + '>' + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + '</p>' + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
         }
 
         //Re-creates the map
         initMap();
 
+        //Console.logs data from ajax request for inspection/debugging.
         console.log(data);
-        console.log(data.list[0].weather[0].icon);
     }
 
 //---------------------------------------------------------------
@@ -83,10 +85,26 @@ $(document).ready(function() {
         $('#test-info').html('');
     }
 
+    //Function for clearing out the value of the city-input. This way the 'city query' section of the ajax request (that's inside the function "getWeather") doesn't continue giving the same city after the marker has been dragged and dropped.
+    function clearCity() {
+        cityInput.val('');
+    }
+
 //---------------------------------------------------------------
 //     BUTTONS FUNCTIONALITY
-//     Display newly input information when "Go!" button is clicked.
 
+    //Listens for an "Enter" keypress on the document and executes specified functions.
+    $(document).keyup(function(e){
+
+        if (e.keyCode === 13) {
+            console.log("it worked");
+            divDeleter();
+            getWeather();
+            clearCity();
+            }
+        });
+
+    //Display newly input information when "Go!" button is clicked.
     $('#get-info').click(function() {
 
         //Executes the function "divDeleter"
@@ -95,12 +113,10 @@ $(document).ready(function() {
         //Executes the function "getWeather"
         getWeather();
 
-        //Clear out the value of the input, so the 'city query' section of the ajax request inside the function "getWeather" doesn't continue giving the same city after the marker has been dragged.
-        $('#city-input').val('');
+        //Executes the function "clearCity"
+        clearCity();
 
     });
-
-
 
 //---------------------------------------------------------------
     //Initializes the function "getWeather"
