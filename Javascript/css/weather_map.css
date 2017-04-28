@@ -6,7 +6,20 @@ html, body {
 }
 
 h1 {
+    position: relative;
+    background-color: #4d576c;
+}
 
+#nav-bar {
+    position: absolute;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active {
+    border: 1px solid #ffffff;
 }
 
 button {

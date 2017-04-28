@@ -2,9 +2,11 @@ $(document).ready(function() {
 
     "use strict";
 
-    var latLongButton = $('#lat-lng');
     var cityName = $('#city-name');
-    var map;
+    var map = new google.maps.Map($('#map')[0], {
+        center: {lat: 29.445864, lng: -98.503457},
+        zoom: 10
+    });
     var pos;
 //---------------------------------------------------------------
 
@@ -31,7 +33,7 @@ $(document).ready(function() {
     //Functionality to create new instance of Google Map from Google API.
     function initMap() {
 
-        map = new google.maps.Map($('#map')[0], {
+        var map = new google.maps.Map($('#map')[0], {
             center: pos,
             zoom: 10
         });
@@ -56,20 +58,23 @@ $(document).ready(function() {
 
     //Function for displaying received data passed in from function "getWeather"
     function buildWeather(data){
+
         //Put City Name Results as the City Name h2 element.
         cityName.text(data.city.name);
 
-        //Create a function that puts latitude and longitude from the current city into the variable 'pos'.
+        //Put latitude and longitude from the current city into the variable 'pos'.
         pos = {lat: data.city.coord.lat, lng: data.city.coord.lon};
 
-        //Create a loop that loops three times and each time, adds specified information into a <div> element.
+        //Create a loop that loops three times, and each time, adds specified information into a <div> element named "test-info".
         for(var i=0; i<=2; i++) {
-            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + data.list[i].weather[0].icon + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
+            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png"' + '>' + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
         }
 
+        //Re-creates the map
         initMap();
 
         console.log(data);
+        console.log(data.list[0].weather[0].icon);
     }
 
 //---------------------------------------------------------------
@@ -98,6 +103,7 @@ $(document).ready(function() {
 
 
 //---------------------------------------------------------------
+    //Initializes the function "getWeather"
     getWeather();
 
 });
