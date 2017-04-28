@@ -8,14 +8,10 @@ $(document).ready(function() {
     var pos;
 //---------------------------------------------------------------
 
-    // Functionality to Retrieve weather information from OpenWeatherMap and display it on page.
-    function putWeather (lat, long) {
+    // Function to Retrieve weather information from OpenWeatherMap
+    function getWeather(lat, long) {
 
-        if (lat === '' && long === '') {
-
-        }
-
-    //Functionality to retrieve data from Open Weather Map
+        //Retrieves data from Open Weather Map
         $.ajax({
             url: "http://api.openweathermap.org/data/2.5/forecast/daily",
             type: "GET",
@@ -46,22 +42,25 @@ $(document).ready(function() {
             draggable: true
         });
 
+        //This forces the marker-
         google.maps.event.addListener(marker, 'dragend', function() {
             var lat = this.getPosition().lat();
             var lng = this.getPosition().lng();
             map.setCenter({lat: lat, lng: lng});
-
-
+            divDeleter();
+            getWeather(lat, lng);
         });
     }
 
+//---------------------------------------------------------------
+
+    //Function for displaying received data passed in from function "getWeather"
     function buildWeather(data){
         //Put City Name Results as the City Name h2 element.
         cityName.text(data.city.name);
 
         //Create a function that puts latitude and longitude from the current city into the variable 'pos'.
         pos = {lat: data.city.coord.lat, lng: data.city.coord.lon};
-
 
         //Create a loop that loops three times and each time, adds specified information into a <div> element.
         for(var i=0; i<=2; i++) {
@@ -72,22 +71,33 @@ $(document).ready(function() {
 
         console.log(data);
     }
+
+//---------------------------------------------------------------
+    //Function for deleting content of div "test-info" which contains all three divs from loop.
+    function divDeleter() {
+        $('#test-info').html('');
+    }
+
 //---------------------------------------------------------------
 //     BUTTONS FUNCTIONALITY
 //     Display newly input information when "Go!" button is clicked.
 
     $('#get-info').click(function() {
-        $('#test-info').html('');
-        putWeather();
+
+        //Executes the function "divDeleter"
+        divDeleter();
+
+        //Executes the function "getWeather"
+        getWeather();
+
+        //Clear out the value of the input, so the 'city query' section of the ajax request inside the function "getWeather" doesn't continue giving the same city after the marker has been dragged.
+        $('#city-input').val('');
+
     });
 
-//     Inject latitude and longitude values from input into API request;
-    latLongButton.click(function() {
-
-    });
 
 
 //---------------------------------------------------------------
-    putWeather();
+    getWeather();
 
 });
