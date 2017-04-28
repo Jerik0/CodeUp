@@ -1,5 +1,5 @@
 html, body {
-    background-color: #343838;
+    background-image: url('../../images/px_by_Gre3g.png');
     height: 100%;
     margin: 0;
     padding: 0;
@@ -7,45 +7,58 @@ html, body {
 }
 
 h1 {
-    /*font-size: 1.5em;*/
     height: 48px;
+    display: block;
     color: #ffffff;
-    position: relative;
+    text-shadow: 3px 3px #454545;
     background-color: #00DFFC;
     margin-top: 0;
-    padding: 10px 5px 5px 25px;
+    padding: 10px 5px 5px 85px;
 }
 
-#cloud-icon {
-    height: 64px;
-    width: 64px;
-    position: absolute;
-    top: 0%;
-    left: 26%;
-}
-
-#city-name {
-    background-color: rgba(0, 180, 204, 0.6);
-    text-shadow: 3px 3px #264455;
-    margin: 5px 0 5px 5%;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    padding-left: 5px;
-    color: #ffffff;
+#nav-container {
+    position: fixed;
+    width: 100%;
+    top:0;
+    left:0;
+    z-index: 3;
 }
 
 #nav-bar {
+    display: block;
     height: 48px;
-    width: 400px;
+    /*width: 100%;*/
     position: absolute;
     top: 0%;
-    right: 0%;
+    right: 10px;
     padding: 10px 5px 5px 5px;
 }
 
 .nav-bar-content {
     margin: 4px;
     font-size: 1.5em;
+}
+
+#app-title {
+    position: relative;
+}
+
+#cloud-icon {
+    height: 64px;
+    width: 64px;
+    position: absolute;
+    top: 2px;
+    left: 10px;
+}
+
+#city-name {
+    background-color: rgba(25, 197, 255, 0.6);
+    text-shadow: 3px 3px #264455;
+    margin: 5px 0 20px 5%;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #ffffff;
 }
 
 #city-input {
@@ -69,22 +82,36 @@ button {
     color: #ffffff;
 }
 
+#e-e {
+    margin-top: 8%;
+    z-index: 2;
+}
+
 #test-info {
     text-align: center;
-    background: url('../../images/clouds1.jpg');
-    background-size: cover;
+    color: #343b42;
+    background: url('../../images/weather.png');
     margin: 0 auto;
     width: 90%;
     height: 220px;
     border-radius: 5px;
 }
 
+#weather-msg {
+    margin: 75px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    padding: 10px 5px 5px 10px
+}
+
 .info-box {
     font-size: 1.4em;
     text-align: center;
+    text-shadow: 3px 3px #0c4257;
     color: #ffffff;
     background-color: rgba(77, 87, 108, 0.6);
-    border-radius: 5px;
+    border-radius: 50%;
     margin: 0px 10px 10px 10px;
     width: 30%;
     height: 100%;

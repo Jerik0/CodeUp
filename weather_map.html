@@ -7,21 +7,25 @@
 </head>
 <body>
 
-    <h1>Weather Application</h1>
-
-    <img id="cloud-icon" src="images/cloud-icon.png" alt="cloud icon">
-
-    <h2 id="city-name"></h2>
-
-    <div id="nav-bar">
-        <input id="city-input" class="nav-bar-content" type="text" placeholder="your city here" autofocus>
-
-        <button id="get-info" class="nav-bar-content">Go!</button>
+    <div id="nav-container">
+        <h1 id="app-title">Weather Application</h1>
+        <img id="cloud-icon" src="images/cloud-icon.png" alt="cloud icon">
+        <div id="nav-bar">
+            <input id="city-input" class="nav-bar-content" type="text" placeholder="your city here" autofocus>
+            <button id="get-info" class="nav-bar-content">Go!</button>
+        </div>
     </div>
 
-    <div id="test-info"></div>
+    <div id="e-e">
+        <h2 id="city-name"></h2>
+        <div id="test-info">
+            <h1 id="weather-msg">YOUR WEATHER APPEARS HERE</h1>
+        </div>
 
-    <div id="map"></div>
+        <div id="map">
+        </div>
+        <button id="geocode-btn">Geocode!</button>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"

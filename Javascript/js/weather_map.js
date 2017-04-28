@@ -4,11 +4,63 @@ $(document).ready(function() {
 
     var cityName = $('#city-name');
     var cityInput = $('#city-input');
+    // var geoCodeIt = new google.maps.Geocoder;
     var map = new google.maps.Map($('#map')[0], {
-        center: {lat: 40.003643, lng: -75.142849},
-        zoom: 10
+        center: {lat: 29.427038, lng: -98.489576},
+        zoom: 15
+    });
+
+    var marker = new google.maps.Marker({
+        position: map.center,
+        map: map,
+        draggable: true
     });
     var pos;
+
+    //---------------------------------------------------------------
+
+    //Functionality to create new instance of Google Map from Google API.
+    function initMap() {
+
+        var map = new google.maps.Map($('#map')[0], {
+            center: pos,
+            zoom: 10
+        });
+
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            draggable: true
+        });
+
+        //This forces the marker--once user has dragged it-- to input its current latitude and longitude into the variables 'lat' and 'lng' respectively. It will then center the map on those coordinates and send the coordinates to the getWeather function.
+        google.maps.event.addListener(marker, 'dragend', function() {
+            var lat = this.getPosition().lat();
+            var lng = this.getPosition().lng();
+            map.setCenter({lat: lat, lng: lng});
+            map.zoom = 13;
+            divDeleter();
+            getWeather(lat, lng);
+        });
+    }
+//---------------------------------------------------------------
+
+    //Function to Geocode address or place from '#city-input'.
+    function geoCoder() {
+        geoCodeIt.geocode( {'address' : cityInput.value},
+            function(results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                new google.maps.Marker({
+                    postion: results[0].geometry.location,
+                    map: map
+                });
+            } else {
+                console.log("Geocode wasn't successful for reason: " + status);
+            }
+        });
+    }
+
 //---------------------------------------------------------------
 
     //Function to Retrieve weather information from OpenWeatherMap
@@ -30,31 +82,6 @@ $(document).ready(function() {
                buildWeather(data);
             });
     }
-//---------------------------------------------------------------
-
-    //Functionality to create new instance of Google Map from Google API.
-    function initMap() {
-
-        var map = new google.maps.Map($('#map')[0], {
-            center: pos,
-            zoom: 10
-        });
-
-        var marker = new google.maps.Marker({
-            position: pos,
-            map: map,
-            draggable: true
-        });
-
-        //This forces the marker--once user has dragged it-- to input its current latitude and longitude into the variables 'lat' and 'lng' respectively. It will then center the map on those coordinates and send the coordinates to the getWeather function.
-        google.maps.event.addListener(marker, 'dragend', function() {
-            var lat = this.getPosition().lat();
-            var lng = this.getPosition().lng();
-            map.setCenter({lat: lat, lng: lng});
-            divDeleter();
-            getWeather(lat, lng);
-        });
-    }
 
 //---------------------------------------------------------------
 
@@ -69,10 +96,10 @@ $(document).ready(function() {
 
         //Create a loop that loops three times, and each time, adds specified information into a <div> element named "test-info".
         for(var i=0; i<=2; i++) {
-            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/ ' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png"' + '>' + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + '</p>' + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
+            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/ ' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png">' + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + '</p>' + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
         }
 
-        //Re-creates the map
+        //Re-creates the map with updated information.
         initMap();
 
         //Console.logs data from ajax request for inspection/debugging.
@@ -90,6 +117,17 @@ $(document).ready(function() {
         cityInput.val('');
     }
 
+    function placeMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+
+    google.maps.event.addListener(map, "click", function(event) {
+        placeMarker(event.latLng);
+    });
+
 //---------------------------------------------------------------
 //     BUTTONS FUNCTIONALITY
 
@@ -97,7 +135,6 @@ $(document).ready(function() {
     $(document).keyup(function(e){
 
         if (e.keyCode === 13) {
-            console.log("it worked");
             divDeleter();
             getWeather();
             clearCity();
@@ -118,8 +155,8 @@ $(document).ready(function() {
 
     });
 
+    // $('#geocode-btn').click();
+
 //---------------------------------------------------------------
-    //Initializes the function "getWeather"
-    getWeather();
 
 });
