@@ -1,5 +1,6 @@
 html, body {
     background-image: url('../../images/px_by_Gre3g.png');
+    background-attachment: fixed;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -27,7 +28,6 @@ h1 {
 #nav-bar {
     display: block;
     height: 48px;
-    /*width: 100%;*/
     position: absolute;
     top: 0%;
     right: 10px;
@@ -37,6 +37,7 @@ h1 {
 .nav-bar-content {
     margin: 4px;
     font-size: 1.5em;
+    border-radius: 5px;
 }
 
 #app-title {
@@ -51,6 +52,12 @@ h1 {
     left: 10px;
 }
 
+#forecasts-text {
+    color: #ffffff;
+    font-size: 2.0em;
+    text-shadow: 3px 3px #454545;
+}
+
 #city-name {
     background-color: rgba(25, 197, 255, 0.6);
     text-shadow: 3px 3px #264455;
@@ -63,6 +70,10 @@ h1 {
 
 #city-input {
     text-align: center;
+    border-radius: 5px;
+}
+
+#get-info {
     border-radius: 5px;
 }
 
@@ -92,7 +103,7 @@ button {
     color: #343b42;
     background: url('../../images/weather.png');
     margin: 0 auto;
-    width: 90%;
+    width: 92%;
     height: 220px;
     border-radius: 5px;
 }
@@ -111,9 +122,37 @@ button {
     text-shadow: 3px 3px #0c4257;
     color: #ffffff;
     background-color: rgba(77, 87, 108, 0.6);
-    border-radius: 50%;
+    border-radius: 10px;
     margin: 0px 10px 10px 10px;
     width: 30%;
+    height: 100%;
+    max-width: inherit;
+    display: inline-block;
+}
+
+.info-box-med {
+    font-size: 1.2em;
+    text-align: center;
+    text-shadow: 3px 3px #0c4257;
+    color: #ffffff;
+    background-color: rgba(77, 87, 108, 0.6);
+    border-radius: 10px;
+    margin: 0px 10px 10px 10px;
+    width: 15%;
+    height: 100%;
+    max-width: inherit;
+    display: inline-block;
+}
+
+.info-box-sm {
+    font-size: 1em;
+    text-align: center;
+    text-shadow: 3px 3px #0c4257;
+    color: #ffffff;
+    background-color: rgba(77, 87, 108, 0.6);
+    border-radius: 10px;
+    margin: 0px 10px 10px 10px;
+    width: 10%;
     height: 100%;
     max-width: inherit;
     display: inline-block;
@@ -125,12 +164,10 @@ p {
 
 #map {
     margin: 2% auto;
-    height: 400px;
-    width: 90%;
+    height: 500px;
+    width: 50%;
     background-color: #1cbced;
-    border-radius: 5px;
+    border: 3px solid #19c5ff;
+    border-radius: 50%;
 }
 
-#get-info {
-    border-radius: 5px;
-}

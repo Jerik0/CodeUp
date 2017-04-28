@@ -3,12 +3,29 @@ $(document).ready(function() {
     "use strict";
 
     var cityName = $('#city-name');
+
     var cityInput = $('#city-input');
-    // var geoCodeIt = new google.maps.Geocoder;
+
+
+
+    var geoCodeIt = new google.maps.Geocoder;
+
+    var styledMapType = new google.maps.StyledMapType(
+        [
+        {"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]}, {"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}
+        ],
+        {name: 'styled map'});
+
     var map = new google.maps.Map($('#map')[0], {
         center: {lat: 29.427038, lng: -98.489576},
-        zoom: 15
+        zoom: 15,
+        mapTypeControlOptions: {
+            mapTypeIds: ['styled_map']
+        }
     });
+
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
 
     var marker = new google.maps.Marker({
         position: map.center,
@@ -17,23 +34,9 @@ $(document).ready(function() {
     });
     var pos;
 
-    //---------------------------------------------------------------
-
-    //Functionality to create new instance of Google Map from Google API.
-    function initMap() {
-
-        var map = new google.maps.Map($('#map')[0], {
-            center: pos,
-            zoom: 10
-        });
-
-        var marker = new google.maps.Marker({
-            position: pos,
-            map: map,
-            draggable: true
-        });
-
-        //This forces the marker--once user has dragged it-- to input its current latitude and longitude into the variables 'lat' and 'lng' respectively. It will then center the map on those coordinates and send the coordinates to the getWeather function.
+//---------------------------------------------------------------
+    //Function to retrieve new coordinates from dropped Marker
+    function markerDrop(marker) {
         google.maps.event.addListener(marker, 'dragend', function() {
             var lat = this.getPosition().lat();
             var lng = this.getPosition().lng();
@@ -43,68 +46,120 @@ $(document).ready(function() {
             getWeather(lat, lng);
         });
     }
+
+//---------------------------------------------------------------
+
+    //Functionality to create new instance of Google Map from Google API.
+    function initMap() {
+
+        var map = new google.maps.Map($('#map')[0], {
+            center: pos,
+            zoom: 15,
+            mapTypeControlOptions: {
+                mapTypeIds: ['styled_map']
+            }
+        });
+
+        marker.setMap(map);
+        marker.setPosition(pos);
+
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
+
+        //This forces the marker--once user has dragged it-- to input its current latitude and longitude into the variables 'lat' and 'lng' respectively. It will then center the map on those coordinates and send the coordinates to the getWeather function.
+        markerDrop(marker);
+    }
 //---------------------------------------------------------------
 
     //Function to Geocode address or place from '#city-input'.
-    function geoCoder() {
-        geoCodeIt.geocode( {'address' : cityInput.value},
-            function(results, status) {
-            if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                new google.maps.Marker({
-                    postion: results[0].geometry.location,
-                    map: map
+    function geoCoder(cnt) {
+        console.log("Geocoder fired");
+        if(cityInput.val()) {
+            geoCodeIt.geocode({'address': cityInput.val()},
+                function (results, status) {
+                    if (status == 'OK') {
+                        map.setCenter(results[0].geometry.location);
+                        new google.maps.Marker({
+                            postion: results[0].geometry.location,
+                            map: map
+                        });
+                        console.log(cnt);
+                        getWeather(results[0].geometry.location.lat(), results[0].geometry.location.lng(), cnt);
+                    } else {
+                        console.log("Geocode wasn't successful for reason: " + status);
+                    }
                 });
-            } else {
-                console.log("Geocode wasn't successful for reason: " + status);
-            }
-        });
+        } else{
+            getWeather(marker.position.lat(), marker.position.lng(), cnt);
+        }
     }
 
 //---------------------------------------------------------------
 
     //Function to Retrieve weather information from OpenWeatherMap
-    function getWeather(lat, long, zip) {
-
+    function getWeather(lat, long, cnt) {
         //Retrieves data from Open Weather Map
+        console.log(cnt);
         $.ajax({
             url: "http://api.openweathermap.org/data/2.5/forecast/daily",
             type: "GET",
             data: {
                 APPID: "cfdaa9b51b09b5239ab50c12797419d3",
-                q: cityInput.val(),
                 units: "imperial",
                 lat: lat,
                 lon: long,
-                zip: zip
+                cnt: cnt
             }
-            }).done(function(data, status) {
-               buildWeather(data);
-            });
+        }).done(function(data, status) {
+           buildWeather(data, cnt);
+        });
     }
 
 //---------------------------------------------------------------
 
     //Function for displaying received data passed in from function "getWeather"
-    function buildWeather(data){
+    function buildWeather(data, cnt){
 
+        console.log(data.list[1].temp.min);
         //Put City Name Results as the City Name h2 element.
         cityName.text(data.city.name);
-
+        var content = "";
         //Put latitude and longitude from the current city into the variable 'pos'.
         pos = {lat: data.city.coord.lat, lng: data.city.coord.lon};
 
-        //Create a loop that loops three times, and each time, adds specified information into a <div> element named "test-info".
-        for(var i=0; i<=2; i++) {
-            $('#test-info').append('<div class="info-box">' + '<p>' + data.list[i].temp.min+String.fromCharCode(176) + '/ ' + data.list[i].temp.max+String.fromCharCode(176) + '</p>' + '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>' + '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png">' + '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>' + '<p>' + 'Wind: ' + data.list[i].speed + '</p>' + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>');
+        //Create a loop that loops three times, and each time, injects a <div> with specified information into a <div> element named "test-info".
+        for(var i=0; i < data.list.length; i++) {
+            content += '<div class="day">';
+            content += '<p>' + data.list[i].temp.min + String.fromCharCode(176) + '/ ';
+            content += data.list[i].temp.max + '</p>';
+            content += '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>';
+            content += '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png">';
+            content += '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>';
+            content += '<p>' + 'Wind: ' + data.list[i].speed + '</p>';
+            content += '<p>' + 'Pressure: ' + data.list[i].pressure + '</p>' + '</div>';
         }
+        $('#test-info').html(content);
 
+        switch(cnt) {
+            case 3:
+                $('.day').addClass('info-box');
+                break;
+            case 5: $('.day').addClass('info-box-med');
+                break;
+            case 7:
+                $('.day').addClass('info-box-sm');
+                break;
+        }
         //Re-creates the map with updated information.
         initMap();
 
         //Console.logs data from ajax request for inspection/debugging.
         console.log(data);
     }
+//---------------------------------------------------------------
+
+//---------------------------------------------------------------
+
 
 //---------------------------------------------------------------
     //Function for deleting content of div "test-info" which contains all three divs from loop.
@@ -136,27 +191,43 @@ $(document).ready(function() {
 
         if (e.keyCode === 13) {
             divDeleter();
-            getWeather();
+            geoCoder(3);
             clearCity();
             }
         });
 
+    $('#3-day-frcst').click(function() {
+        geoCoder(3);
+
+    });
+
+    $('#5-day-frcst').click(function() {
+        geoCoder(5);
+
+
+    });
+
+    $('#7-day-frcst').click(function() {
+        geoCoder(7);
+
+
+    });
+
     //Display newly input information when "Go!" button is clicked.
     $('#get-info').click(function() {
-
+        console.log("click fired");
         //Executes the function "divDeleter"
         divDeleter();
 
-        //Executes the function "getWeather"
-        getWeather();
+        //Executes the function "geoCoder"
+        geoCoder(3);
 
         //Executes the function "clearCity"
         clearCity();
 
     });
 
-    // $('#geocode-btn').click();
 
 //---------------------------------------------------------------
-
+//  testing geoCoder object stuff
 });
