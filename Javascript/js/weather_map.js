@@ -43,7 +43,7 @@ $(document).ready(function() {
             map.setCenter({lat: lat, lng: lng});
             map.zoom = 13;
             divDeleter();
-            getWeather(lat, lng);
+            geoCoder(3);
         });
     }
 
@@ -156,10 +156,6 @@ $(document).ready(function() {
         //Console.logs data from ajax request for inspection/debugging.
         console.log(data);
     }
-//---------------------------------------------------------------
-
-//---------------------------------------------------------------
-
 
 //---------------------------------------------------------------
     //Function for deleting content of div "test-info" which contains all three divs from loop.
