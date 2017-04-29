@@ -131,7 +131,7 @@ $(document).ready(function() {
         for(var i=0; i < data.list.length; i++) {
             content += '<div class="day">';
             content += '<p>' + data.list[i].temp.min + String.fromCharCode(176) + '/ ';
-            content += data.list[i].temp.max + '</p>';
+            content += data.list[i].temp.max  + String.fromCharCode(176) + '</p>';
             content += '<p>' + 'Clouds: ' + data.list[i].weather[0].description + '</p>';
             content += '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png">';
             content += '<p>' + 'Humidity: ' + data.list[i].humidity + '</p>';
